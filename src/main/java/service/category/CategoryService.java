@@ -1,6 +1,7 @@
 package service.category;
 
 import dao.categoryDAO.CategoryDAO;
+import model.Category;
 import model.Product;
 
 import java.util.List;
@@ -26,5 +27,9 @@ public class CategoryService implements ICategoryService{
     @Override
     public List findAll() {
         return categoryDAO.findAll();
+    }
+
+    public Category findById(int id) {
+        return categoryDAO.findById(id);
     }
 }

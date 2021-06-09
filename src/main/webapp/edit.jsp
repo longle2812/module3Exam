@@ -25,7 +25,7 @@
         </button>
     </div>
 </c:if>
-<form style="margin-left: 20px" action="?action=create" method="post">
+<form style="margin-left: 20px" action="?action=edit&productId=${product.getId()}" method="post">
     <div class="form-group">
         <label for="exampleInputEmail1">Name</label>
         <input name="name" type="text" class="form-control" id="exampleInputEmail1" placeholder="${product.getName()}">
@@ -44,19 +44,18 @@
     </div>
     <div class="form-group">
         <label for="exampleInputPassword1">Description</label>
-        <input name="description" type="text" class="form-control" id="description" placeholder="${product.getDescription}">
+        <input name="description" type="text" class="form-control" id="description" placeholder="${product.getDescription()}">
     </div>
     <div class="form-group">
         <label for="exampleInputPassword1">Category</label>
-        <select name="category" class="form-control" id="dropDownList" name="dropDownList">
-            <option selected value="default"> ${categoryName)}</option>
+        <select  name="category" class="form-control" id="dropDownList" name="dropDownList">
             <c:forEach var="categories" items="${categories}">
-                <option value="${categories.getId()}"> ${categories.getName()}</option>
+                <option <c:if test="${product.getCategory() == categories.getId()}"> selected="selected" </c:if> value="${categories.getId()}"> ${categories.getName()}</option>
             </c:forEach>
         </select>
     </div>
     <div>
-        <button type="submit" class="btn btn-primary">Create</button>
+        <button type="submit" class="btn btn-primary">Edit</button>
         <a href="/products" class="btn btn-info active" role="button" aria-pressed="true">Back</a>
     </div>
 </form>

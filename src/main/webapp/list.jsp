@@ -3,33 +3,45 @@
 <html>
 <head>
     <title>Product List</title>
-</head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" /></head>
 <body>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+<div class="row">
+    <div></div>
+    <div>
+        <form class="col">
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
-<div>
-    <a href="?action=create" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">+ Add new product</a>
+
+        </form>
+    </div>
 </div>
+
+<form class="row g-3" action="/products" method="get">
+    <div class="col-auto">
+        <a style="margin-left: 130px" href="?action=create" class="btn btn-success active" role="button"
+           aria-pressed="true"><i class="fas fa-plus-square"></i> Add new
+            product</a>
+    </div>
+    <div class="col-auto">
+        <input name="q" class="form-control " type="nameSearch" placeholder="Enter book name"
+               aria-label="Search" style="width: 300px;margin-left: 520px;">
+    </div>
+    <div class="col-auto">
+        <button class="btn btn-primary active" type="submit" >Search
+        </button>
+    </div>
+</form>
 
 <div class="container">
     <div class="row">
-
-
         <div class="col-md-12">
-            <h4>Bootstrap Snipp for Datatable</h4>
+            <h4><i class="fas fa-list"></i> Product list</h4>
             <div class="table-responsive">
-
-
                 <table id="mytable" class="table table-bordred table-striped">
-
                     <thead>
-
-                    <th><input type="checkbox" id="checkall"/></th>
                     <th>#</th>
                     <th>Product Name</th>
                     <th>Price</th>
@@ -42,7 +54,6 @@
                     <tbody>
                     <c:forEach items="${products}" var="product">
                         <tr>
-                            <td><input type="checkbox" class="checkthis"/></td>
                             <td>${product.getId()}</td>
                             <td>${product.getName()}</td>
                             <td>${product.getPrice()}</td>
@@ -53,17 +64,15 @@
                             </c:forEach>
                             </td>
                             <td>
-                                <a href="?action=edit&productId=${product.getId()}" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Edit</a>
+                                <a href="?action=edit&productId=${product.getId()}"
+                                   class="btn btn-info btn-sm active" role="button" aria-pressed="true"><i class="fas fa-edit"></i></a>
                             </td>
                             <td>
-                                <p data-placement="top" data-toggle="tooltip" title="Delete">
-                                    <button type="button" class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal"
-                                            data-target="#delete"><span class="glyphicon glyphicon-trash"></span></button>
-                                </p>
+                                <a href="?action=delete&productId=${product.getId()}"
+                                   class="btn btn-danger btn-sm active" role="button" aria-pressed="true"><i class="fas fa-trash-alt"></i></a>
                             </td>
                         </tr>
                     </c:forEach>
-
                     </tbody>
                 </table>
             </div>

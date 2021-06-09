@@ -2,6 +2,7 @@ package dao.categoryDAO;
 
 import dao.SQLConnection;
 import model.Category;
+import model.Product;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -43,5 +44,23 @@ public class CategoryDAO implements ICategoryDAO{
             throwables.printStackTrace();
         }
         return categories;
+    }
+
+    public Category findById(int id) {
+        Connection connection = SQLConnection.getConnection();
+        Category category = new Category();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from category where id = ?");
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet =  preparedStatement.executeQuery();
+            while (resultSet.next()){
+                String name = resultSet.getString("name");
+                category = new Category(id,name);
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return category;
     }
 }

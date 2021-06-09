@@ -15,12 +15,12 @@ public class ProductService implements IProductService{
 
     @Override
     public boolean update(int id, Product product) {
-        return false;
+        return productDAO.update(id, product);
     }
 
     @Override
     public boolean delete(int id) {
-        return false;
+        return productDAO.delete(id);
     }
 
     @Override
@@ -30,5 +30,9 @@ public class ProductService implements IProductService{
 
     public Product findById(int id) {
         return productDAO.findById(id);
+    }
+
+    public List<Product> search(String q) {
+        return productDAO.search(q);
     }
 }
