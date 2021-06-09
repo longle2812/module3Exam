@@ -20,9 +20,9 @@ service/category/CategoryService.java
  service.category.CategoryService
 dao/categoryDAO/CategoryDAO.java
  dao.categoryDAO.CategoryDAO
-dao/productDAO/ProductDAO.java
- dao.productDAO.ProductDAO
-service/product/ProductService.java
- service.product.ProductService
 controller/ProductServlet.java
  controller.ProductServlet
+service/product/ProductService.java
+ service.product.ProductService
+dao/productDAO/ProductDAO.java
+ dao.productDAO.ProductDAO

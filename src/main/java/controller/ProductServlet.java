@@ -31,7 +31,7 @@ public class ProductServlet extends HttpServlet {
                 editForm(request, response);
                 break;
             case "delete":
-                deleteProduct(request,response);
+                deleteProduct(request, response);
                 break;
             default:
                 showAllProduct(request, response);
@@ -42,7 +42,7 @@ public class ProductServlet extends HttpServlet {
     private void deleteProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("productId"));
         this.productService.delete(id);
-        showAllProduct(request,response);
+        showAllProduct(request, response);
 
     }
 
@@ -66,7 +66,7 @@ public class ProductServlet extends HttpServlet {
     private void showAllProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Product> products = this.productService.findAll();
         String q = request.getParameter("q");
-        if (q!= null){
+        if (q != null) {
             products = this.productService.search(q);
         }
         request.setAttribute("categories", categories);
@@ -115,16 +115,16 @@ public class ProductServlet extends HttpServlet {
             quantity1 = Integer.parseInt(quantity);
         }
         String color = request.getParameter("color");
-        if (color.equals("")){
+        if (color.equals("")) {
             color = product.getColor();
         }
         String description = request.getParameter("description");
-        if (description.equals("")){
+        if (description.equals("")) {
             description = product.getDescription();
         }
         int category = Integer.parseInt(request.getParameter("category"));
         product = new Product(name, price1, quantity1, color, description, category);
-        if (this.productService.update(id, product)){
+        if (this.productService.update(id, product)) {
             request.setAttribute("message", "success");
         } else request.setAttribute("message", "error");
         String categoryName = this.categoryService.findById(category).getName();

@@ -8,12 +8,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDAO implements IProductDAO {
+
+    public static final String CREATE_NEW_PRODUCT = "insert into products (name, price, amount, color,description,category) values (?,?,?,?,?,?)";
+    public static final String UPDATE_PRODUCT = "update products set name=?, price=?,amount=?, color=?,description=?,category=? where id =?";
+    public static final String DELETE_PRODUCT = "delete from products where id = ?";
+    public static final String SHOW_ALL_PRODUCT = "select * from products";
+    public static final String FIND_BY_ID = "select * from products where id = ?";
+    public static final String SEARCH_BY_NAME = "select * from products where name like ?";
+
     @Override
     public boolean createNew(Product product) {
         Connection connection = SQLConnection.getConnection();
         int rowInserted = 0;
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("insert into products (name, price, amount, color,description,category) values (?,?,?,?,?,?)");
+            PreparedStatement preparedStatement = connection.prepareStatement(CREATE_NEW_PRODUCT);
             preparedStatement.setString(1, product.getName());
             preparedStatement.setDouble(2, product.getPrice());
             preparedStatement.setInt(3, product.getQuantity());
@@ -32,7 +40,7 @@ public class ProductDAO implements IProductDAO {
         Connection connection = SQLConnection.getConnection();
         int rowUpdated = 0;
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("update products set name=?, price=?,amount=?, color=?,description=?,category=? where id =?");
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_PRODUCT);
             preparedStatement.setString(1, product.getName());
             preparedStatement.setDouble(2, product.getPrice());
             preparedStatement.setInt(3, product.getQuantity());
@@ -52,7 +60,7 @@ public class ProductDAO implements IProductDAO {
         Connection connection = SQLConnection.getConnection();
         int rowDeleted = 0;
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("delete from products where id = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_PRODUCT);
             preparedStatement.setInt(1, id);
             rowDeleted = preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
@@ -67,7 +75,7 @@ public class ProductDAO implements IProductDAO {
         Connection connection = SQLConnection.getConnection();
         List<Product> products = new ArrayList();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("select * from products");
+            PreparedStatement preparedStatement = connection.prepareStatement(SHOW_ALL_PRODUCT);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int id = Integer.parseInt(resultSet.getString("id"));
@@ -90,7 +98,7 @@ public class ProductDAO implements IProductDAO {
         Connection connection = SQLConnection.getConnection();
         Product product = new Product();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("select * from products where id = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ID);
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -113,7 +121,7 @@ public class ProductDAO implements IProductDAO {
         Connection connection = SQLConnection.getConnection();
         List<Product> products = new ArrayList<>();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("select * from products where name like ?");
+            PreparedStatement preparedStatement = connection.prepareStatement(SEARCH_BY_NAME);
             preparedStatement.setString(1, "%"+q+"%");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
